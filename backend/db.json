@@ -1,0 +1,60 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Pencil",
+      "price": "0.90",
+      "created_at": "2023-04-27 14:00:40",
+      "updated_at": "2023-04-27 14:00:40"
+    },
+    {
+      "id": 2,
+      "name": "MacBook Pro M1",
+      "price": 1200.90,
+      "created_at": "2023-04-27 13:05:20",
+      "updated_at": "2023-04-27 13:05:20"
+    },
+    {
+      "id": 3,
+      "name": "Samsung S20+",
+      "price": 800.89,
+      "created_at": "2023-04-27 20:25:10",
+      "updated_at": "2023-04-27 20:25:10"
+    },
+    {
+      "name": "Freezer",
+      "price": "513.99",
+      "id": 4,
+      "created_at": "2023-04-27 23:47:00",
+      "updated_at": "2023-04-27 23:47:00"
+    },
+    {
+      "name": "Test",
+      "price": 255,
+      "id": 5,
+      "created_at": "2023-04-27 18:36:22",
+      "updated_at": "2023-04-27 18:36:22"
+    },
+    {
+      "name": "Test 2",
+      "price": 255,
+      "id": 6,
+      "created_at": "2023-04-27 19:26:22",
+      "updated_at": "2023-04-27 19:26:32"
+    },
+    {
+      "name": "Soundbar Samsung",
+      "price": "150.40",
+      "id": 7,
+      "created_at": "2023-04-27 20:46:49",
+      "updated_at": "2023-04-27 20:46:49"
+    },
+    {
+      "name": "Keyboard",
+      "price": "10.2",
+      "id": 8,
+      "created_at": "2023-05-03T01:14:46.787Z",
+      "updated_at": "2023-05-03T01:14:46.787Z"
+    }
+  ]
+}

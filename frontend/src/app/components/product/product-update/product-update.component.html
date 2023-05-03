@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-title>Update Product</mat-card-title>
+  <form action="">
+    <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="product.name" name="name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Price" [(ngModel)]="product.price" name="price">
+    </mat-form-field>
+  </form>
+
+  <div class="flex mb-1">
+    <button (click)="updateProduct()" mat-raised-button color="primary">Save</button>
+
+    <button (click)="cancel()" mat-raised-button color="white">Cancelar</button>
+
+    <div class="date">
+      Created at:
+      <span>{{ product.created_at | date:'H:mm a - yyyy/MM/dd' }}</span>
+    </div>
+  </div>
+</mat-card>

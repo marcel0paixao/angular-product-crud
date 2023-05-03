@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-title>Delete Product</mat-card-title>
+  <form action="">
+    <mat-form-field>
+      <input matInput placeholder="Name" [value]="product.name" name="name" disabled>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Price" [value]="product.price" name="price" disabled>
+    </mat-form-field>
+  </form>
+
+  <div class="flex mb-1">
+    <button (click)="deleteProduct()" mat-raised-button color="warn">Delete</button>
+
+    <button (click)="cancel()" mat-raised-button color="white">Cancel</button>
+
+    <div class="date">
+      Created at:
+      <span>{{ product.created_at | date:'H:mm a - yyyy/MM/dd' }}</span>
+    </div>
+  </div>
+</mat-card>

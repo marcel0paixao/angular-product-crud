@@ -1,0 +1,20 @@
+.header{
+  display: flex;
+  align-items: center;
+}
+.header a{
+  color: black;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.header img{
+  max-width: 60px;
+}
+.header .title-group{
+  padding-left: 25px;
+}
+
+.header .title-group i{
+  padding-right: 5px;
+}

@@ -1,0 +1,20 @@
+button{
+  max-width: max-content;
+  margin: 0px 10px;
+}
+button:first-of-type{
+  max-width: max-content;
+  margin: 0px;
+}
+mat-card{
+  padding: 1rem;
+}
+mat-form-field{
+  display: block;
+}
+mat-card-title{
+  margin-bottom: 10px;
+}
+.date {
+  margin-top: 10px;
+}

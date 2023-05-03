@@ -1,0 +1,31 @@
+.full-width-table {
+  width: 100%;
+}
+i.delete{
+  color: rgb(255, 33, 33);
+  margin-left: 10px;
+}
+.action, .price, .created{
+  width: 8%;
+  min-width: 90px;
+}
+.action, .price, .created{
+  width: 9%;
+  min-width: 130px;
+}
+.action{
+  text-align: right;
+}
+.name{
+  width: 60%;
+  min-width: 130px;
+}
+td:first-of-type, th:first-of-type{
+  width: 50px;
+}
+mat-card-title{
+  margin-bottom: 10px;
+}
+.date {
+  margin-top: 10px;
+}
