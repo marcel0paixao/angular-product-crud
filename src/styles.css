@@ -20,3 +20,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: #e35e6b;
   color: white;
 }
+
+mat-nav-list {
+  height: 98%;
+  overflow-y: hidden;
+}
+
+mat-sidenav-content{
+  height: 100%;
+}
+
+.card-container {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Box shadow suave */
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: inset;
+  max-width: 350px;
+  width: 100%;
+  min-width: 300px;
+  max-height: 100vh;
+  min-height: max-content;
+  margin: 0px auto;
+  vertical-align: center;
+  border-radius: 8px;
+  padding: 10px;
+}

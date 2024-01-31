@@ -22,8 +22,8 @@ import { ProductCreateComponent } from './components/product/product-create/prod
 import { RedDirective } from './directives/red.directive';
 import { ForDirective } from './directives/for.directive';
 
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
@@ -39,6 +39,14 @@ import { ProductUpdateComponent } from './components/product/product-update/prod
 import { ProductDeleteComponent } from './components/product/product-delete/product-delete.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { AuthInterceptor } from './components/auth/auth-interceptor.service';
+import { LogoutComponent } from './components/auth/logout/logout.component';
+
+import {
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatDialogModule
+} from '@angular/material/dialog';
+import { DialogAnimationsDialog } from './components/dialogs/dialog-animations/dialog-animations.component';
 
 registerLocaleData(localePt)
 
@@ -58,7 +66,9 @@ registerLocaleData(localePt)
     ProductUpdateComponent,
     ProductDeleteComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LogoutComponent,
+    DialogAnimationsDialog
   ],
   imports: [
     BrowserModule,
@@ -78,12 +88,25 @@ registerLocaleData(localePt)
     MatPaginatorModule,
     MatSortModule,
     MatDividerModule, 
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [
     {
       provide: LOCALE_ID,
       useValue: 'en-US'
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS, 
+      useValue: {
+        hasBackdrop: false
+      }
     }
   ],
   bootstrap: [AppComponent]

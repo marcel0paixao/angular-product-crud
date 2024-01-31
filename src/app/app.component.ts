@@ -17,11 +17,7 @@ export class AppComponent {
 
   constructor(private authService: AuthService) { }
 
-  register(registerDto: Register) {
-    this.authService.register(registerDto).subscribe();
-  }
-
-  login(loginDto: Login) {
-    this.authService.login(loginDto).subscribe();
+  getToken(): string | null {
+    return this.authService.getToken();
   }
 }

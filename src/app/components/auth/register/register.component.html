@@ -1,23 +1,75 @@
-<form (ngSubmit)="register()" class="block">
-    <div>
-        <mat-form-field class="w-100">
-            <mat-label>E-mail</mat-label>
-            <input matInput type="email" placeholder="Insert your e-mail">
-        </mat-form-field>
-    </div>
+<form [formGroup]="form" (ngSubmit)="register()" class="block">
     <div>
         <mat-form-field class="w-100">
             <mat-label>Name</mat-label>
-            <input matInput type="text" placeholder="Insert your name">
+            <input matInput formControlName="name" required type="text" placeholder="Insert your name">
         </mat-form-field>
+
+        <div *ngFor="let errorKey of getErrorKeys('name')">
+            <div *ngIf="form.get('name')?.hasError(errorKey) && form.get('name')?.touched" class="error">
+                {{ getErrorMessage(errorKey, 'name') }}
+            </div>
+        </div>
+    </div>
+    <div>
+        <mat-form-field class="w-100">
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email" required type="email" placeholder="Insert your e-mail">
+        </mat-form-field>
+        
+        <div *ngFor="let errorKey of getErrorKeys('email')">
+            <div *ngIf="form.get('email')?.hasError(errorKey) && form.get('email')?.touched" class="error">
+              {{ getErrorMessage(errorKey, 'email') }}
+            </div>
+        </div>
     </div>
     <div>
         <mat-form-field class="w-100">
             <mat-label>Password</mat-label>
-            <input matInput type="password" placeholder="Insert your password" class="w-full">
+            <input matInput formControlName="password" required type="password" placeholder="Insert your password" class="w-full" maxlength="20">
         </mat-form-field>
+
+        <div class="mb-2 text-gray-500 password_rules">
+            <span class="mb-2 text-gray-500">The password must:</span>
+            <div class="mt-1 flex">
+                <div *ngIf="!getPasswordValidation()['minlength']; else elseMinlength">
+                    <mat-icon class="text-green flex">check</mat-icon>
+                </div>
+                <ng-template #elseMinlength>
+                    <mat-icon>close</mat-icon>
+                </ng-template>
+                <span [ngClass]="{'rule_text': true, 'text-green': !getPasswordValidation()['minlength']}">Have at least 7 characters</span>
+            </div>
+            <div class="mt-1 flex">
+                <div *ngIf="getPasswordValidation()['lowerCase']; else elseMaxlength">
+                    <mat-icon class="text-green flex">check</mat-icon>
+                </div>
+                <ng-template #elseMaxlength>
+                    <mat-icon>close</mat-icon>
+                </ng-template>
+                <span [ngClass]="{'rule_text': true, 'text-green': getPasswordValidation()['lowerCase']}">Have at least 1 lower case character</span>
+            </div>
+            <div class="mt-1 flex">
+                <div *ngIf="getPasswordValidation()['upperCase']; else elseMaxlength">
+                    <mat-icon class="text-green flex">check</mat-icon>
+                </div>
+                <ng-template #elseMaxlength>
+                    <mat-icon>close</mat-icon>
+                </ng-template>
+                <span [ngClass]="{'rule_text': true, 'text-green': getPasswordValidation()['upperCase']}">Have at least 1 upper case character</span>
+            </div>
+            <div class="mt-1 flex">
+                <div *ngIf="getPasswordValidation()['specialChars']; else elseSpecialChars">
+                    <mat-icon class="text-green ml-1">check</mat-icon>
+                </div>
+                <ng-template #elseSpecialChars>
+                    <mat-icon>close</mat-icon>
+                </ng-template>
+                <span [ngClass]="{'rule_text': true, 'text-green': getPasswordValidation()['specialChars']}">Have at least 1 special character</span>
+            </div>
+        </div>
     </div>
     <div class="flex mb-1 mt-auto">
-        <button type="submit" mat-raised-button color="primary" class="w-100 mt-2">REGISTER</button>
+        <button type="submit" [disabled]="form!.errors || isAnyFieldsEmpty()" mat-raised-button color="primary" class="w-100 mt-2">REGISTER</button>
     </div>
 </form>

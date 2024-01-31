@@ -1,8 +1,8 @@
-<ng-container *ngIf="jwtDto">
+<div *ngIf="getToken() else unlogged">
     <app-header></app-header>
     <app-nav></app-nav>
     <app-footer></app-footer>
-</ng-container>
-<ng-container *ngIf="!jwtDto">
-    <app-login></app-login>
-</ng-container>
+</div>
+<ng-template #unlogged>
+    <router-outlet></router-outlet>
+</ng-template>

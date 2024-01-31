@@ -6,12 +6,14 @@ import { environment } from 'src/environments/environment.development';
 import { Login } from '../models/login';
 import { Register } from '../models/register';
 import { JwtAuth } from '../models/jwtAuth';
+import { User } from '../models/User';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private readonly router: Router) {}
 
   private apiUrl = environment.apiUrl;
 
@@ -19,19 +21,24 @@ export class AuthService {
     return this.http.post<JwtAuth>(`${this.apiUrl}/user/login`, user);
   }
 
-  register(user: Register): Observable<JwtAuth> {
-    return this.http.post<JwtAuth>(`${this.apiUrl}/user/register`, user);
+  register(user: Register): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/user/register`, user);
   }
 
-  storeToken(token: string): void {
-    localStorage.setItem('token', token);
+  storeToken(access_token: string): void {
+    localStorage.setItem('access_token', access_token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem('access_token');
   }
   
   clearToken(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('access_token');
+  }
+
+  logout = () => {
+    this.clearToken();
+    this.router.navigate(['/login']);
   }
 }

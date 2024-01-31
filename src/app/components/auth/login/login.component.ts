@@ -1,9 +1,10 @@
 // login.component.ts
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Login } from '../../models/login';
-import { RegisterComponent } from '../register/register.component';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ErrorMessages } from '../../models/errorMessage';
+import { HeaderService } from '../../template/header/header.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,26 +12,81 @@ import { RegisterComponent } from '../register/register.component';
   template: ''
 })
 export class LoginComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private fb: FormBuilder, private headerService: HeaderService, private router: Router) {
+    headerService.headerData = {
+      title: 'Login',
+      icon: 'login',
+      routeUrl: '/login'
+    }
+  }
+
+  NgOnInit() {
+    if (!!this.authService.getToken()) this.router.navigate(['home'])
+  }
+
+  form!: FormGroup;
+  errorMessages: ErrorMessages = {
+    email: {
+      email: 'Invalid email format.',
+      required: 'This field is required.',
+      maxlength: 'The field length must be maximum of {{ max_length }} characters.'
+    },
+    password: {
+      required: 'This field is required.',
+      maxlength: 'The field length must be maximum of {{ max_length }} characters.'
+    },
+  };
+  
+  ngOnInit(): void {
+    this.initForm();
+    if (this.getToken()) this.redirectHome();
+  }
+
+  initForm(): void {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.maxLength(20)]],
+    });
+  }
+
+  getErrorKeys(controlName: string): string[] {
+    return Object.keys(this.form.get(controlName)!.errors || {});
+  }
+
+  getErrorMessage(errorKey: string, controlName: string): string {
+    return this.errorMessages[controlName][errorKey]
+  }
+
   registerForm: boolean = false;
 
   switchForms() {
     this.registerForm = !this.registerForm;
+    if (this.registerForm) {
+      this.router.navigate(['/register'])
+    } else {
+      this.router.navigate(['/login'])
+    }
   }
-  
-  user: Login = {
-    email: '',
-    password: ''
+
+  getToken(): string | null {
+    return this.authService.getToken();
+  }
+
+  redirectHome(): void {
+    this.router.navigate(['/products'])
   }
 
   login(): void {
-    this.authService.login(this.user).subscribe(
-      (response) => {
-        this.authService.storeToken(response.token);
-      },  
-      (error) => {
-        console.log(error);
-      }
-    );
+    if (this.form.valid) {
+      this.authService.login(this.form.value).subscribe(
+        (response) => {
+          this.authService.storeToken(response.access_token);
+          this.router.navigate(['/home']);
+        },  
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 }

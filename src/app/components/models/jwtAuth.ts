@@ -1,5 +1,6 @@
+import { User } from "./User";
+
 export interface JwtAuth {
-    token: string;
-    result: boolean;
-    error: any;
+    access_token: string;
+    user: User;
 }
