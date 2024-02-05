@@ -8,13 +8,14 @@ import { HeaderService } from 'src/app/components/template/header/header.service
   styleUrls: ['./product-crud.component.css']
 })
 export class ProductCrudComponent {
-  constructor(private headerService: HeaderService, private router: Router) {
+  constructor(private headerService: HeaderService, private readonly router: Router) {
     headerService.headerData = {
       title: 'Product CRUD',
       icon: 'storefront',
       routeUrl: '/products'
     }
   }
+
   navigateToProductCreate(): void {
     this.router.navigate(['/products/create'])
   }

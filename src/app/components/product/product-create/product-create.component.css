@@ -1,3 +1,5 @@
+@import url('../../auth//login/login.component.css');
+
 button{
   max-width: max-content;
   margin: 0px 10px;
