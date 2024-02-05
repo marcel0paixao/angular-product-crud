@@ -5,7 +5,7 @@
     overflow-y: hidden;
 }
 .card-container {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Box shadow suave */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     transition: box-shadow 0.3s ease-in-out;
     max-width: 350px !important;
     width: 100% !important;
@@ -19,7 +19,7 @@
 }
 
 .card-container:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Box shadow mais pronunciado */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }
 
 .w-full {

@@ -9,7 +9,7 @@
     align-items: center; 
 }
 .card-container {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Box shadow suave */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     transition: box-shadow 0.3s ease-in-out;
     box-shadow: inset;
     max-width: 350px;
