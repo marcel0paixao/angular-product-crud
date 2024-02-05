@@ -1,22 +1,37 @@
 <mat-card>
   <mat-card-title>New Product</mat-card-title>
-  <form action="">
-    <mat-form-field>
-      <input matInput placeholder="Name" [(ngModel)]="product.name" name="name">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Price" [(ngModel)]="product.price" name="price">
-    </mat-form-field>
-  </form>
-
-  <div class="flex mb-1">
-    <button (click)="createProduct()" mat-raised-button color="primary">Save</button>
-
-    <button (click)="cancel()" mat-raised-button color="white">Cancel</button>
-
-    <div class="date">
-      Created at:
-      <span>{{ product.created_at | date:'H:mm a - yyyy/MM/dd' }}</span>
+  <form [formGroup]="form" (ngSubmit)="createProduct()">
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="name" required type="text" placeholder="Insert the product name">
+      </mat-form-field>
+      <div *ngFor="let errorKey of getErrorKeys('name')">
+          <div *ngIf="form.get('name')?.hasError(errorKey) && form.get('name')?.touched" class="error">
+              {{ getErrorMessage(errorKey, 'name') }}
+          </div>
+      </div>
     </div>
-  </div>
+
+    <div>
+      <mat-form-field>
+        <input matInput formControlName="price" required type="number" maxlength="5" placeholder="Insert the product price">
+      </mat-form-field>
+      <div *ngFor="let errorKey of getErrorKeys('price')">
+        <div *ngIf="form.get('price')?.hasError(errorKey) && form.get('price')?.touched" class="error">
+            {{ getErrorMessage(errorKey, 'price') }}
+        </div>
+      </div>
+    </div>
+
+    <div class="flex mb-1">
+      <button type="submit" [disabled]="form!.errors || isAnyFieldsEmpty()"  mat-raised-button color="primary">Save</button>
+  
+      <button (click)="cancel()" mat-raised-button color="white">Cancel</button>
+  
+      <div class="date">
+        Created at:
+        <span>{{ form.get('created_at')!.value | date:'H:mm a - yyyy/MM/dd' }}</span>
+      </div>
+    </div>
+  </form>
 </mat-card>

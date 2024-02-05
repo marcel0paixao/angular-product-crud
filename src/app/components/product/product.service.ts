@@ -3,15 +3,16 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Product } from './product.model';
 import { EMPTY, Observable, catchError, map } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
-
-  baseurl = 'http://localhost:3001/products'
-
-  constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
+  constructor(private snackBar: MatSnackBar, private http: HttpClient, private readonly router: Router) {}
+  baseurl = environment.apiUrl + '/products';
 
   showMessage(msg: string, isError: boolean = false): void {
     this.snackBar.open(msg, 'X', {
@@ -30,7 +31,7 @@ export class ProductService {
   }
 
   errorHandler(e: any): Observable<any> {
-    this.showMessage('Occurred an error!', true)
+    // this.showMessage('Occurred an error!', true)
     console.log(e)
     return EMPTY
   }
@@ -46,7 +47,7 @@ export class ProductService {
 
   update(product: Product): Observable<Product>{
     const url = `${this.baseurl}/${product.id}`
-    return this.http.put<Product>(url, product)
+    return this.http.patch<Product>(url, product)
   }
 
   delete(id: string): Observable<Product>{

@@ -1,35 +1,67 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
-import { Product } from '../product.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ErrorMessages } from '../../models/errorMessage';
+
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css']
 })
+
 export class ProductCreateComponent {
-  attr = 'qualquer';
-  product: Product = {
-    name: '',
-    price: 0,
-    id: 0,
-    created_at: new Date(),
-    updated_at: new Date()
-  }
+  constructor(private productService: ProductService, private router: Router, private fb: FormBuilder) {}
 
-  constructor(private productService: ProductService, private router: Router) {
+  form!: FormGroup;
+  errorMessages: ErrorMessages = {
+    name: {
+      required: 'The field is required.',
+      minlength: 'The field length must be at least 10 characters.',
+      maxlength: 'The field length must be maximum of 50 characters.'
+    },
+    price: {
+      required: 'The field is required.',
+      min: 'The field cannot be less than 1.'
+    }
+  };
 
+  initForm(): void {
+    this.form = this.fb.group({
+      name: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
+      price: [null, [Validators.required, Validators.min(1), Validators.maxLength(5)]],
+      created_at: [new Date(), [Validators.required]],
+      category_id: [3]
+    });
   }
 
   ngOnInit(): void {
+    this.initForm();
+  }
 
+  getErrorKeys(controlName: string): string[] {
+    return Object.keys(this.form.get(controlName)!.errors || {});
+  }
+
+  getErrorMessage(errorKey: string, controlName: string): string {
+    return this.errorMessages[controlName][errorKey];
+  }
+
+  isAnyFieldsEmpty(): boolean {
+    return !!this.form.get('name')!.errors || !!this.form.get('price')!.errors;
   }
 
   createProduct(): void {
-    this.productService.create(this.product).subscribe(() => {
-      this.router.navigate(['/products'])
-      this.productService.showMessage('Sucessfully operation!')
-    })
+    if (this.form.valid) { 
+      this.productService.create(this.form.value).subscribe(
+        () => {
+          this.router.navigate(['/products'])
+          this.productService.showMessage('Sucessfully operation!')
+        },
+        (error) => console.log(error)
+      )
+      return;
+    }
   }
 
   cancel(): void {
