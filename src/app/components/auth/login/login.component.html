@@ -2,13 +2,8 @@
     <mat-card class="card-container">
         <div *ngIf="!getToken()">
             <mat-card-header class="d-flex align-items-center h-max mb-3 p-0">
-                <mat-card-actions *ngIf="registerForm">
-                    <button mat-icon-button matTooltip="Back to login" color="primary" class="rounded-full w-max block" (click)="switchForms()">
-                        <mat-icon class="mx-auto">arrow_back_ios</mat-icon>
-                    </button>
-                </mat-card-actions>
-                <div [ngClass]="{'my-3': !registerForm}">
-                    <mat-card-title class="uppercase">{{ registerForm ? 'REGISTER' : 'LOGIN' }}</mat-card-title>
+                <div class="my-3">
+                    <mat-card-title class="uppercase">LOGIN</mat-card-title>
                 </div>
             </mat-card-header>
             <ng-container *ngIf="!registerForm; else registerBlock">

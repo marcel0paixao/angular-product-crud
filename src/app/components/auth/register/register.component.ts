@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessages } from '../../models/errorMessage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import { ErrorMessages } from '../../models/errorMessage';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  constructor(private authService: AuthService, private fb: FormBuilder) {}
+  constructor(private authService: AuthService, private fb: FormBuilder, private readonly router: Router) {}
 
   form!: FormGroup;
   errorMessages: ErrorMessages = {
@@ -21,7 +22,8 @@ export class RegisterComponent {
     email: {
       required: 'The field is required.',
       email: 'The field must be a valid email.',
-      maxlength: 'The field length must be maximum of 50 characters.'
+      maxlength: 'The field length must be maximum of 50 characters.',
+      unique: 'E-mail has already been taken.'
     },
     password: {
       required: 'The field is required.',
@@ -35,6 +37,15 @@ export class RegisterComponent {
   
   ngOnInit(): void {
     this.initForm();
+    if (!!this.authService.getToken()) this.redirectHome();
+  }
+
+  redirectHome(): void {
+    this.router.navigate(['/products'])
+  }
+
+  backToLogin(): void {
+    this.router.navigate(['/login']);
   }
 
   initForm(): void {
@@ -91,6 +102,11 @@ export class RegisterComponent {
           );
         },  
         (error) => {
+          if(error.error.message == "e-mail must be unique") {
+            this.form.get('email')!.setErrors({unique: true});
+            return;
+          }
+
           console.log(error);
         },
         () => {
