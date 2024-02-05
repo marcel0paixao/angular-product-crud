@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Adicione o token Bearer à requisição, se estiver disponível
     const token = localStorage.getItem('access_token');
 
     if (token) {
