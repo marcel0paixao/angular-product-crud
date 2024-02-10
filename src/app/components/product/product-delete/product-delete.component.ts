@@ -21,14 +21,14 @@ export class ProductDeleteComponent {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')
-    this.productService.readById(id ?? "0").subscribe(product => {
+    this.productService.readById(id!).subscribe(product => {
       this.product = product
     })
   }
 
   deleteProduct(): void {
     const id = this.route.snapshot.paramMap.get('id')
-    this.productService.delete(id ?? "0").subscribe(() => {
+    this.productService.delete(id!).subscribe(() => {
       this.productService.showMessage("Product deleted!")
       this.router.navigate(["/products"])
     })
