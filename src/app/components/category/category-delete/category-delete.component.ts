@@ -27,7 +27,7 @@ export class CategoryDeleteComponent {
 
   deleteCategory(): void {
     const id = this.route.snapshot.paramMap.get('id')
-    this.categoryService.delete(id ?? "0").subscribe(() => {
+    this.categoryService.delete(id!).subscribe(() => {
       this.categoryService.showMessage("Category deleted!")
       this.router.navigate(["/categories"])
     })

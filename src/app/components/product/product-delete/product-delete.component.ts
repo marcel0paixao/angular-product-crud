@@ -28,7 +28,7 @@ export class ProductDeleteComponent {
 
   deleteProduct(): void {
     const id = this.route.snapshot.paramMap.get('id')
-    this.productService.delete(id ?? "0").subscribe(() => {
+    this.productService.delete(id!).subscribe(() => {
       this.productService.showMessage("Product deleted!")
       this.router.navigate(["/products"])
     })
