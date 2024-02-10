@@ -20,6 +20,11 @@ import { HomeComponent } from './views/home/home.component';
 import { RedDirective } from './directives/red.directive';
 import { ForDirective } from './directives/for.directive';
 
+import {
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatDialogModule
+} from '@angular/material/dialog';
+
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -44,11 +49,6 @@ import { ProductCrudComponent } from './views/product-crud/product-crud.componen
 import { ProductCreateComponent } from './components/product/product-create/product-create.component';
 
 import { CategoryCreateComponent } from './components/category/category-create/category-create.component';
-
-import {
-  MAT_DIALOG_DEFAULT_OPTIONS,
-  MatDialogModule
-} from '@angular/material/dialog';
 import { DialogAnimationsDialog } from './components/dialogs/dialog-animations/dialog-animations.component';
 import { CategoryCrudComponent } from './views/category-crud/category-crud.component';
 import { CategoryReadComponent } from './components/category/category-read/category-read.component';
