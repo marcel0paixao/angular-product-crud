@@ -53,6 +53,7 @@ import { DialogAnimationsDialog } from './components/dialogs/dialog-animations/d
 import { CategoryCrudComponent } from './views/category-crud/category-crud.component';
 import { CategoryReadComponent } from './components/category/category-read/category-read.component';
 import { CategoryUpdateComponent } from './components/category/category-update/category-update.component';
+import { CategoryDeleteComponent } from './components/category/category-delete/category-delete.component';
 
 registerLocaleData(localePt)
 
@@ -78,7 +79,8 @@ registerLocaleData(localePt)
     CategoryCreateComponent,
     CategoryCrudComponent,
     CategoryReadComponent,
-    CategoryUpdateComponent
+    CategoryUpdateComponent,
+    CategoryDeleteComponent
   ],
   imports: [
     BrowserModule,

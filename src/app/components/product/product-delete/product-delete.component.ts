@@ -21,7 +21,7 @@ export class ProductDeleteComponent {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')
-    this.productService.readById(id ?? "0").subscribe(product => {
+    this.productService.readById(id!).subscribe(product => {
       this.product = product
     })
   }
