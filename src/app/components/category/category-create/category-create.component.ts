@@ -3,6 +3,7 @@ import { CategoryService } from '../category.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessages } from '../../models/errorMessage';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-category-create',
@@ -10,7 +11,7 @@ import { ErrorMessages } from '../../models/errorMessage';
   styleUrls: ['./category-create.component.css']
 })
 export class CategoryCreateComponent {
-  constructor(private categoryService: CategoryService, private router: Router, private fb: FormBuilder) {}
+  constructor(private categoryService: CategoryService, private router: Router, private fb: FormBuilder, private readonly authService: AuthService) {}
   
   form!: FormGroup;
   errorMessages: ErrorMessages = {
@@ -24,6 +25,7 @@ export class CategoryCreateComponent {
   initForm(): void {
     this.form = this.fb.group({
       name: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
+      user_id: this.authService.getUser()!.id,
       created_at: [new Date(), [Validators.required]]
     });
   }

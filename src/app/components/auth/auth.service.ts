@@ -37,6 +37,14 @@ export class AuthService {
     localStorage.removeItem('access_token');
   }
 
+  storeUser(user: User): void {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  getUser(): User | null {
+    return JSON.parse(localStorage.getItem('user') ?? 'null');
+  }
+
   logout = () => {
     this.clearToken();
     this.router.navigate(['/login']);

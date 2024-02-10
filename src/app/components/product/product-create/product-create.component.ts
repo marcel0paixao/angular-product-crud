@@ -31,7 +31,7 @@ export class ProductCreateComponent {
       name: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
       price: [null, [Validators.required, Validators.min(1), Validators.maxLength(5)]],
       created_at: [new Date(), [Validators.required]],
-      category_id: [3]
+      category_id: [1]
     });
   }
 

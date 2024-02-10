@@ -102,7 +102,7 @@ export class RegisterComponent {
           );
         },  
         (error) => {
-          if(error.error.message == "e-mail must be unique") {
+          if(error.error.message == "field must be unique") {
             this.form.get('email')!.setErrors({unique: true});
             return;
           }
