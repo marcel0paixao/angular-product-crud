@@ -23,8 +23,8 @@ export class CategoryService {
     })
   }
 
-  create(product: Category): Observable<Category> {
-    return this.http.post<Category>(this.baseurl, product).pipe(
+  create(category: Category): Observable<Category> {
+    return this.http.post<Category>(this.baseurl, category).pipe(
       map(obj => obj),
       catchError(this.errorHandler)
     )
@@ -45,9 +45,9 @@ export class CategoryService {
     return this.http.get<Category>(url)
   }
 
-  update(product: Category): Observable<Category>{
-    const url = `${this.baseurl}/${product.id}`
-    return this.http.patch<Category>(url, product)
+  update(category: Category): Observable<Category>{
+    const url = `${this.baseurl}/${category.id}`
+    return this.http.patch<Category>(url, category)
   }
 
   delete(id: string): Observable<Category>{
