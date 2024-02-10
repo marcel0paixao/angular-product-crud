@@ -13,6 +13,12 @@
         </i>
         <span>Products</span>
       </a>
+      <a mat-list-item routerLink="/categories" *ngIf="getToken()">
+        <i class="material-icons">
+          category
+        </i>
+        <span>Categories</span>
+      </a>
       <a mat-list-item (click)="openLogout()" *ngIf="getToken()" class="mt-auto block">
         <i class="material-icons">
           logout
