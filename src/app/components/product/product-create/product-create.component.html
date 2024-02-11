@@ -26,7 +26,7 @@
   
       <div class="w-1/5 ml-auto">
         <mat-form-field>
-          <mat-select placeholder="Select a category" formControlName="category_id">
+          <mat-select placeholder="Select a category" formControlName="category_id" [disabled]="categories.length == 0">
             <mat-option *ngFor="let category of categories" [value]="category.value">
               {{ category.label }}
             </mat-option>
