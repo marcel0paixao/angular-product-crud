@@ -4,13 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessages } from '../../models/errorMessage';
 import { CategoryService } from '../category.service';
+import { AuthService } from '../../auth/auth.service';
 @Component({
   selector: 'app-category-update',
   templateUrl: './category-update.component.html',
   styleUrls: ['./category-update.component.css']
 })
 export class CategoryUpdateComponent {
-  constructor(private categoryService: CategoryService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(private categoryService: CategoryService, private router: Router, private route: ActivatedRoute, private authService: AuthService, private fb: FormBuilder) {}
 
   form!: FormGroup;
   errorMessages: ErrorMessages = {
@@ -25,6 +26,7 @@ export class CategoryUpdateComponent {
     this.form = this.fb.group({
       id: [null, [Validators.required]],
       name: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
+      user_id: this.authService.getUser()!.id,
       created_at: [new Date(), [Validators.required]],
       updated_at: [new Date(), [Validators.required]]
     });

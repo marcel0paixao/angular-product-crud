@@ -12,18 +12,35 @@
       </div>
     </div>
 
-    <div>
-      <mat-form-field>
-        <input matInput formControlName="price" required type="number" maxlength="5" placeholder="Insert the product price">
-      </mat-form-field>
-      <div *ngFor="let errorKey of getErrorKeys('price')">
-        <div *ngIf="form.get('price')?.hasError(errorKey) && form.get('price')?.touched" class="error">
-            {{ getErrorMessage(errorKey, 'price') }}
+    <div class="flex">
+      <div class="w-1/5">
+        <mat-form-field>
+          <input matInput formControlName="price" required type="number" maxlength="5" placeholder="Insert the price">
+        </mat-form-field>
+        <div *ngFor="let errorKey of getErrorKeys('price')">
+          <div *ngIf="form.get('price')?.hasError(errorKey) && form.get('price')?.touched" class="error">
+              {{ getErrorMessage(errorKey, 'price') }}
+          </div>
+        </div>
+      </div>
+  
+      <div class="w-1/5 ml-auto">
+        <mat-form-field>
+          <mat-select placeholder="Select a category" formControlName="category_id">
+            <mat-option *ngFor="let category of categories" [value]="category.value">
+              {{ category.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngFor="let errorKey of getErrorKeys('category_id')">
+          <div *ngIf="form.get('category_id')?.hasError(errorKey) && form.get('category_id')?.touched" class="error">
+              {{ getErrorMessage(errorKey, 'category_id') }}
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="flex mb-1">
+    <div class="mb-1">
       <button type="submit" [disabled]="form!.errors || isAnyFieldsEmpty()"  mat-raised-button color="primary">Save</button>
   
       <button (click)="cancel()" mat-raised-button color="white">Cancel</button>

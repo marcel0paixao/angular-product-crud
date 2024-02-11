@@ -4,12 +4,26 @@
     <mat-form-field>
       <input matInput placeholder="Name" [value]="product.name" name="name" disabled>
     </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Price" [value]="product.price" name="price" disabled>
-    </mat-form-field>
+    <div class="flex">
+      <div class="w-1/5">
+        <mat-form-field>
+          <input matInput [value]="product.price" disabled>
+        </mat-form-field>
+      </div>
+  
+      <div class="w-1/5 ml-auto">
+        <mat-form-field>
+          <mat-select [(value)]="category.id" disabled>
+            <mat-option [value]="category.id">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
   </form>
 
-  <div class="flex mb-1">
+  <div class="mb-1">
     <button (click)="deleteProduct()" mat-raised-button color="warn">Delete</button>
 
     <button (click)="cancel()" mat-raised-button color="white">Cancel</button>

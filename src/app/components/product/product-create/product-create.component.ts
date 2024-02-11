@@ -3,6 +3,9 @@ import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessages } from '../../models/errorMessage';
+import { AuthService } from '../../auth/auth.service';
+import { Category } from '../../category/category.model';
+import { CategoryService } from '../../category/category.service';
 
 @Component({
   selector: 'app-product-create',
@@ -11,7 +14,7 @@ import { ErrorMessages } from '../../models/errorMessage';
 })
 
 export class ProductCreateComponent {
-  constructor(private productService: ProductService, private router: Router, private fb: FormBuilder) {}
+  constructor(private productService: ProductService, private categoryService: CategoryService, private authService: AuthService, private router: Router, private fb: FormBuilder) {}
 
   form!: FormGroup;
   errorMessages: ErrorMessages = {
@@ -23,20 +26,35 @@ export class ProductCreateComponent {
     price: {
       required: 'The field is required.',
       min: 'The field cannot be less than 1.'
+    },
+    category_id: {
+      required: 'The field is required.'
     }
   };
+
+  categories: {
+    value: number,
+    label: string
+  }[] = [];
 
   initForm(): void {
     this.form = this.fb.group({
       name: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
       price: [null, [Validators.required, Validators.min(1), Validators.maxLength(5)]],
       created_at: [new Date(), [Validators.required]],
-      category_id: [1]
+      user_id: this.authService.getUser()!.id,
+      category_id: [null, [Validators.required]]
     });
+
+    this.categoryService.read().subscribe(
+      (categories) => {
+        categories.map((category: Category) => this.categories!.push({value: category.id, label: category.name}))
+      }
+    )
   }
 
   ngOnInit(): void {
-    this.initForm();
+    this.initForm();;
   }
 
   getErrorKeys(controlName: string): string[] {
@@ -52,6 +70,8 @@ export class ProductCreateComponent {
   }
 
   createProduct(): void {
+    console.log(this.form.value);
+    
     if (this.form.valid) { 
       this.productService.create(this.form.value).subscribe(
         () => {
