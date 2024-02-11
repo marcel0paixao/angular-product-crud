@@ -3,7 +3,9 @@ import { ProductService } from '../product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessages } from '../../models/errorMessage';
-import { Product } from '../product.model';
+import { CategoryService } from '../../category/category.service';
+import { Category } from '../../category/category.model';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-product-update',
@@ -11,7 +13,7 @@ import { Product } from '../product.model';
   styleUrls: ['./product-update.component.css']
 })
 export class ProductUpdateComponent {
-  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(private productService: ProductService, private categoryService: CategoryService, private authService: AuthService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {}
 
   form!: FormGroup;
   errorMessages: ErrorMessages = {
@@ -26,23 +28,31 @@ export class ProductUpdateComponent {
     }
   };
 
+  categories: {
+    value: number,
+    label: string
+  }[] = [];
+  
   initForm(): void {
     this.form = this.fb.group({
       id: [null, [Validators.required]],
       name: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
       price: [null, [Validators.required, Validators.min(1), Validators.maxLength(5)]],
+      user_id: this.authService.getUser()!.id,
       created_at: [new Date(), [Validators.required]],
       updated_at: [new Date(), [Validators.required]],
-      category_id: [3]
+      category_id: null
     });
 
-    this.productService.readById(this.route.snapshot.paramMap.get('id')!).subscribe(response => {
-      this.form.setValue(response)
-    })
+    this.productService.readById(this.route.snapshot.paramMap.get('id')!).subscribe(response => this.form.setValue(response))
+    this.categoryService.read().subscribe(
+      categories => categories.map((category: Category) => this.categories!.push({value: category.id, label: category.name}))
+    )
   }
 
   ngOnInit(): void {
     this.initForm();
+    console.log(this.form.get('category_id')!.value);
   }
 
   getErrorKeys(controlName: string): string[] {

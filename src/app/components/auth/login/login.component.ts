@@ -81,6 +81,7 @@ export class LoginComponent {
       this.authService.login(this.form.value).subscribe(
         (response) => {
           this.authService.storeToken(response.access_token);
+          this.authService.storeUser(response.user);
           this.router.navigate(['/home']);
         },  
         (error) => {
