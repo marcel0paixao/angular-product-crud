@@ -18,7 +18,8 @@ export class CategoryCreateComponent {
     name: {
       required: 'The field is required.',
       minlength: 'The field length must be at least 5 characters.',
-      maxlength: 'The field length must be maximum of 50 characters.'
+      maxlength: 'The field length must be maximum of 50 characters.',
+      unique: 'Category name has already been taken.'
     }
   };
 
@@ -53,7 +54,13 @@ export class CategoryCreateComponent {
           this.router.navigate(['/categories'])
           this.categoryService.showMessage('Sucessfully operation!')
         },
-        (error) => console.log(error)
+        (error) => {
+          if(error.error.message == "field must be unique") {
+            this.form.get('name')!.setErrors({unique: true});
+            return;
+          }
+          console.log(error)
+        }
       )
       return;
     }

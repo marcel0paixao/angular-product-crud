@@ -18,7 +18,8 @@ export class CategoryUpdateComponent {
     name: {
       required: 'The field is required.',
       minlength: 'The field length must be at least 5 characters.',
-      maxlength: 'The field length must be maximum of 50 characters.'
+      maxlength: 'The field length must be maximum of 50 characters.',
+      unique: 'Category name has already been taken.'
     }
   };
 
@@ -53,10 +54,17 @@ export class CategoryUpdateComponent {
   }
 
   updateCategory(): void {
-    this.categoryService.update(this.form.value).subscribe(() => {
-      this.categoryService.showMessage("Category updated!")
-      this.router.navigate(["/categories"])
-    })
+    this.categoryService.update(this.form.value).subscribe(
+      () => {
+        this.categoryService.showMessage("Category updated!")
+        this.router.navigate(["/categories"])
+      }, (error) => {
+        if(error.error.message == "field must be unique") {
+          this.form.get('name')!.setErrors({unique: true});
+          return;
+        }
+        console.log(error)
+      })
   }
 
   cancel(): void {
