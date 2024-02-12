@@ -21,7 +21,8 @@ export class ProductCreateComponent {
     name: {
       required: 'The field is required.',
       minlength: 'The field length must be at least 10 characters.',
-      maxlength: 'The field length must be maximum of 50 characters.'
+      maxlength: 'The field length must be maximum of 50 characters.',
+      unique: 'Product name has already been taken.'
     },
     price: {
       required: 'The field is required.',
@@ -66,7 +67,7 @@ export class ProductCreateComponent {
   }
 
   isAnyFieldsEmpty(): boolean {
-    return !!this.form.get('name')!.errors || !!this.form.get('price')!.errors;
+    return !!this.form.get('name')!.errors || !!this.form.get('price')!.errors || !!this.form.get('category_id')!.errors;
   }
 
   createProduct(): void {
@@ -78,7 +79,13 @@ export class ProductCreateComponent {
           this.router.navigate(['/products'])
           this.productService.showMessage('Sucessfully operation!')
         },
-        (error) => console.log(error)
+        (error) => {
+          if(error.error.message == "field must be unique") {
+            this.form.get('name')!.setErrors({unique: true});
+            return;
+          }
+          console.log(error)
+        }
       )
       return;
     }

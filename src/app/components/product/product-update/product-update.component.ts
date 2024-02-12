@@ -20,7 +20,8 @@ export class ProductUpdateComponent {
     name: {
       required: 'The field is required.',
       minlength: 'The field length must be at least 10 characters.',
-      maxlength: 'The field length must be maximum of 50 characters.'
+      maxlength: 'The field length must be maximum of 50 characters.',
+      unique: 'Product name has already been taken.'
     },
     price: {
       required: 'The field is required.',
@@ -64,14 +65,21 @@ export class ProductUpdateComponent {
   }
 
   isAnyFieldsEmpty(): boolean {
-    return !!this.form.get('name')!.errors || !!this.form.get('price')!.errors;
+    return !!this.form.get('name')!.errors || !!this.form.get('price')!.errors || !!this.form.get('category_id')!.errors;
   }
 
   updateProduct(): void {
-    this.productService.update(this.form.value).subscribe(() => {
-      this.productService.showMessage("Product updated!")
-      this.router.navigate(["/products"])
-    })
+    this.productService.update(this.form.value).subscribe(
+      () => {
+        this.productService.showMessage("Product updated!")
+        this.router.navigate(["/products"])
+      }, (error) => {
+        if(error.error.message == "field must be unique") {
+          this.form.get('name')!.setErrors({unique: true});
+          return;
+        }
+        console.log(error)
+      })
   }
 
   cancel(): void {

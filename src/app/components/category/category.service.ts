@@ -26,7 +26,7 @@ export class CategoryService {
   create(category: Category): Observable<Category> {
     return this.http.post<Category>(this.baseurl, category).pipe(
       map(obj => obj),
-      catchError(this.errorHandler)
+      // catchError(this.errorHandler)
     )
   }
 
