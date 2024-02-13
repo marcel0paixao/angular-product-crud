@@ -1,6 +1,103 @@
-<mat-card class="home mat-elevation-z3">
-  <mat-card-title class="title">Welcome!</mat-card-title>
-  <mat-card-subtitle class="subtitle">
+<ng-container>
+  <div *ngIf="user; else unLoggedBlock">
+    <mat-card class="home mat-elevation-z3">
+      <mat-card-title class="title">
+        <span>Welcome {{ user.name }}!</span>
+      </mat-card-title>
+      <mat-card-subtitle class="subtitle">
+        <span>You are logged, now view the statistics of your account.</span>
+      </mat-card-subtitle>
+    </mat-card>
+    
+    <mat-grid-list [cols]="breakpoint" rowHeight="2:2" (window:resize)="onResize($event)" class="py-2 space-x-4">
+      <mat-grid-tile class="statistics-container">
+        <mat-card class="statistics-card">
+          <mat-card-header>
+            <mat-card-title>Your products</mat-card-title>
+            <mat-card-subtitle>Statistics</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="flex max-h-max">
+              <h2 class="text-xxl mb-0">{{ productsLength }}</h2> <span class="align-middle ml-2">products created by you.</span>
+            </div>
+            <p class="mt-2">Go to products page to see your products, edit and delete, or create new ones.</p>
+          </mat-card-content>
+          <mat-card-actions class="mt-auto">
+            <button mat-button (click)="products()">Go to products</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
 
-  </mat-card-subtitle>
-</mat-card>
+      <mat-grid-tile class="statistics-container">
+        <mat-card class="statistics-card">
+          <mat-card-header>
+            <mat-card-title>Your categories</mat-card-title>
+            <mat-card-subtitle>Statistics</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="flex max-h-max">
+              <h2 class="text-xxl mb-0">{{ categoriesLength }}</h2> <span class="align-middle ml-2">categories created by you.</span>
+            </div>
+            <p class="mt-2">Go to products page to see your categories, edit and delete, or create new ones.</p>
+          </mat-card-content>
+          <mat-card-actions class="mt-auto">
+            <button mat-button (click)="categories()">Go to categories</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+      
+      <mat-grid-tile class="statistics-container">
+        <mat-card class="statistics-card">
+          <mat-card-header>
+            <mat-card-title>Your sales</mat-card-title>
+            <mat-card-subtitle>Statistics</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="flex max-h-max">
+              <h2 class="text-xxl mb-0">34</h2> <span class="align-middle ml-2">products sold by you.</span>
+            </div>
+            <p class="mt-2">Go to your sales page to see your analítics of billing and costs.</p>
+          </mat-card-content>
+          <mat-card-actions class="mt-auto">
+            <button mat-button (click)="products()">Go to sales</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+
+      <mat-grid-tile class="statistics-container">
+        <mat-card class="statistics-card">
+          <mat-card-header>
+            <mat-card-title>Expired products</mat-card-title>
+            <mat-card-subtitle>Statistics</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="flex max-h-max">
+              <h2 class="text-xxl mb-0">2</h2> <span class="align-middle ml-2">products expired.</span>
+            </div>
+            <p class="mt-2">Go to expired products page to renew your advertisements.</p>
+          </mat-card-content>
+          <mat-card-actions class="mt-auto">
+            <button mat-button (click)="products()">Go to expireds</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <ng-template #unLoggedBlock>
+    <div class="p-12">
+      <mat-card class="home mat-elevation-z3">
+        <mat-card-title class="title">
+          <span>Welcome!</span>
+        </mat-card-title>
+        <mat-card-subtitle class="subtitle">
+          <span>You are not logged, but you can do it any moment you wish.</span>
+        </mat-card-subtitle>
+      </mat-card>
+    
+      <div class="mt-2" class="mt-auto">
+        <button mat-raised-button color="primary" (click)="login()">Login</button>
+      </div>
+    </div>
+  </ng-template>
+</ng-container>
