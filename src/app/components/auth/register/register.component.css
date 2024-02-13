@@ -1,4 +1,5 @@
 @import url('../login/login.component.css');
+@import url('../../../../styles.css');
 
 .password_rules {
     margin-top: -10px;

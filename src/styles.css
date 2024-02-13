@@ -21,15 +21,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: white;
 }
 
-mat-nav-list {
-  height: 98%;
-  overflow-y: hidden;
-}
-
-mat-sidenav-content{
-  height: 100%;
-}
-
 .card-container {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.3s ease-in-out;
@@ -43,4 +34,118 @@ mat-sidenav-content{
   vertical-align: center;
   border-radius: 8px;
   padding: 10px;
+}
+mat-card {
+  border: 1px solid #232323;
+  background-color: rgb(41, 41, 41) !important;
+  color: #c1c1c1;
+}
+mat-card input::placeholder{
+  color: #c1c1c1;
+}
+mat-card button {
+  color: #1c1c1c !important;
+}
+mat-card-subtitle, p{
+  color: #888888 !important;
+}
+button span {
+  color: #f1f1f1 !important;
+}
+button {
+  border-radius: 5px;
+}
+/* primary */
+.mat-mdc-raised-button:not(:disabled).mat-primary {
+  background-color: rgb(25, 25, 112) !important;
+}
+button .primary span {
+  color: #f1f1f1 !important;
+}
+h1 ..mat-mdc-dialog-container .mdc-dialog__title {
+  color: #f1f1f1 !important;
+}
+div[mat-dialog-content]{
+  color: #c1c1c1 !important;
+}
+.mat-mdc-raised-button:not(:disabled).mat-warn {
+  background-color: rgb(139, 0, 0) !important;
+}
+.mat-mdc-raised-button:not(:disabled).mat-cancel {
+  background-color: rgb(47, 47, 47) !important;
+}
+.mat-mdc-text-field-wrapper .mdc-text-field .ng-tns-c35-1 .mdc-text-field--filled .mdc-text-field--no-label, .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: rgb(24, 24, 24) !important;
+}
+.mdc-text-field--disabled {
+  background-color: rgb(32, 32, 32) !important;
+  cursor: not-allowed !important;
+}   
+mat-form-field input {
+  color: #f1f1f1 !important;
+}
+mat-form-field input::placeholder {
+  color: #c1c1c1 !important;
+}
+mat-form-field input {
+  color: #f1f1f1 !important;
+}
+mat-select span {
+  color: #f1f1f1 !important;
+}
+div[role="listbox"] {
+  background-color: rgb(24, 24, 24) !important;
+} 
+.mat-mdc-select-arrow svg{
+  fill: #f1f1f1 !important;
+} 
+mat-option {
+  color: #c1c1c1 !important;
+} 
+i.delete{
+  color: rgb(139, 0, 0);
+  margin-left: 10px;
+}
+i.edit{
+  color: rgb(25, 25, 112);
+  margin-left: 10px;
+}
+table {
+  background: rgb(16, 16, 16);
+  box-shadow: none;
+}
+tr, td, th {
+  color: #c1c1c1;
+}
+tr {
+  border-bottom-color: #c1c1c1;
+}
+.mat-mdc-dialog-surface, .mat-mdc-dialog-surface {
+  background-color: rgb(24, 24, 24) !important;
+}
+.shadow-none{
+  box-shadow: none;
+}
+#cdk-overlay-0{
+  background-color: rgb(24, 24, 24);
+}
+.span .mat-mdc-button-persistent-ripple .mdc-button__ripple {
+  background-color: none;
+}
+*:disabled, .input-disabled {
+  cursor: not-allowed;
+}
+mat-icon .mat-primary {
+  background-color: rgb(25, 25, 112) !important;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow:0 0 0 50px rgb(24, 24, 24) inset;
+  -webkit-text-fill-color: #333;
+}
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 50px rgb(24, 24, 24) inset;
+  -webkit-text-fill-color: #333;
+}
+mat-label, .mat-mdc-form-field-required-marker {
+  color: #c1c1c1;
 }

@@ -28,14 +28,13 @@ export class LoginComponent {
   errorMessages: ErrorMessages = {
     email: {
       email: 'Invalid email format.',
-      required: 'This field is required.',
-      maxlength: 'The field length must be maximum of {{ max_length }} characters.'
+      required: 'This field is required.'
     },
     password: {
-      required: 'This field is required.',
-      maxlength: 'The field length must be maximum of {{ max_length }} characters.'
+      required: 'This field is required.'
     },
   };
+  invalidLogin: boolean = false;
   
   ngOnInit(): void {
     this.initForm();
@@ -45,7 +44,7 @@ export class LoginComponent {
   initForm(): void {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.maxLength(20)]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -82,9 +81,10 @@ export class LoginComponent {
         (response) => {
           this.authService.storeToken(response.access_token);
           this.authService.storeUser(response.user);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/']);
         },  
         (error) => {
+          if (error.error.message == "Email address or password provided is incorrect.") this.invalidLogin = true;
           console.log(error);
         }
       );

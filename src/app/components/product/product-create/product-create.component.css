@@ -1,4 +1,5 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import url('../../../../styles.css');
 
 button{
   max-width: max-content;
@@ -46,7 +47,7 @@ mat-card-title{
   margin-left: auto;
 }
 .error {
-  color: red;
+  color: rgb(178, 34, 34);
   margin-top: -15px;
   margin-bottom: 10px;
 }

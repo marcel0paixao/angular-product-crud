@@ -1,4 +1,5 @@
 @import url('../product-create/product-create.component.css');
+@import url('../../../../styles.css');
 
 button{
   max-width: max-content;
