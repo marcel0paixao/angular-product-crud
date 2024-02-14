@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
-
+  
+  goToGitHub(): void {
+    window.location.href = 'https://github.com/marcel0paixao/';
+  }
 }

@@ -13,7 +13,7 @@
     </div>
 
     <div class="flex">
-      <div class="w-1/5">
+      <div class="w-1/2">
         <mat-form-field>
           <input matInput formControlName="price" required type="number" maxlength="5" placeholder="Insert the price">
         </mat-form-field>
@@ -24,7 +24,7 @@
         </div>
       </div>
   
-      <div class="w-1/5 ml-auto">
+      <div class="w-1/2 ml-2">
         <mat-form-field>
           <mat-select placeholder="Select a category" formControlName="category_id" [disabled]="categories.length == 0">
             <mat-option *ngFor="let category of categories" [value]="category.value">
@@ -41,9 +41,9 @@
     </div>
 
     <div class="mb-1">
-      <button type="submit" [disabled]="form!.errors || isAnyFieldsEmpty()"  mat-raised-button color="primary">Save</button>
+      <button type="submit" [disabled]="form!.errors || isAnyFieldsEmpty()" mat-raised-button color="primary">Save</button>
   
-      <button (click)="cancel()" mat-raised-button color="white">Cancel</button>
+      <button (click)="cancel()" mat-raised-button color="cancel">Cancel</button>
   
       <div class="date">
         Created at:

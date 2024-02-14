@@ -22,8 +22,17 @@ body {
   margin-top: 0.5rem;
 }
 mat-card {
-  border: 1px solid #c1c1c1;
+  border: 1px solid #232323;
   height: 100%;
+  width: 100%;
+  background-color: rgb(41, 41, 41);
+  color: #c1c1c1;
+}
+mat-card button {
+  color: #c1c1c1 !important;
+}
+mat-card-subtitle, p{
+  color: #888888 !important;
 }
 .text-xxl {
   font-size: 3rem;
@@ -62,8 +71,7 @@ mat-card {
   align-self: flex-end;
 }
 mat-grid-list {
-  grid-template-columns: repeat(auto-fill, minmax(200px, 2fr));
-  gap: 3;
+  justify-content: space-between;
 }
 
 @media (max-width: 1240px) {

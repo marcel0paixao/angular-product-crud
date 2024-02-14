@@ -1,9 +1,7 @@
+@import url('../../../../styles.css');
+
 .full-width-table {
   width: 100%;
-}
-i.delete{
-  color: rgb(255, 33, 33);
-  margin-left: 10px;
 }
 .action, .price, .created{
   width: 8%;

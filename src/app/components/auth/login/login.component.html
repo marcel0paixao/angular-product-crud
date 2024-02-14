@@ -7,11 +7,14 @@
                 </div>
             </mat-card-header>
             <ng-container *ngIf="!registerForm; else registerBlock">
+                <div class="error" *ngIf="invalidLogin">
+                    Email address or password provided is incorrect.
+                </div>
                 <form [formGroup]="form" (ngSubmit)="login()">
                     <div>
                         <mat-form-field class="w-100">
                             <mat-label>E-mail</mat-label>
-                            <input matInput type="email" formControlName="email" placeholder="Insert your e-mail" maxlength="50">
+                            <input matInput type="email" formControlName="email" placeholder="Insert your e-mail" maxlength="50" autocomplete="email">
                         </mat-form-field>     
     
                         <div *ngFor="let errorKey of getErrorKeys('email')">
@@ -23,7 +26,7 @@
                     <div>
                         <mat-form-field class="w-100">
                             <mat-label>Password</mat-label>
-                            <input matInput type="password" formControlName="password" placeholder="Insert your password" class="w-full">
+                            <input matInput type="password" formControlName="password" placeholder="Insert your password" class="w-full" maxlength="20" autocomplete="password">
                         </mat-form-field>
     
                         <div *ngFor="let errorKey of getErrorKeys('password')">

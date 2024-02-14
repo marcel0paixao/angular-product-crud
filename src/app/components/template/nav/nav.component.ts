@@ -16,6 +16,8 @@ export class NavComponent {
   }
 
   openLogout(): void {
+    if (this.dialog.openDialogs.length > 0) return;
+    
     this.dialog.open(DialogAnimationsDialog, { data: {
       title: 'Logout',
       subtitle: 'You are going to be logged out, are you sure?',
@@ -24,4 +26,5 @@ export class NavComponent {
       confirmAction: this.authService.logout
     }})
   }
+
 }
