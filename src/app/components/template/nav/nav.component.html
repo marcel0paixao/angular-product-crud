@@ -1,31 +1,32 @@
 <mat-sidenav-container class="">
   <mat-sidenav class="sidenav" mode="side" opened fixedInViewport fixedTopGap="64">
     <mat-nav-list class="nav-list">
-      <a mat-list-item routerLink="/">
+      <a mat-list-item routerLink="/"(click)="selectItem('home')" (active)="item == 'home'" routerLinkActive="nav_link_selected" [routerLinkActiveOptions]="{exact: true}">
         <i class="material-icons">
           home
         </i>
         <span>Home</span>
       </a>
-      <a mat-list-item routerLink="/products" *ngIf="getToken()">
+      <a mat-list-item routerLink="/products" *ngIf="getToken()" (click)="selectItem('products')" routerLinkActive="nav_link_selected" [routerLinkActiveOptions]="{exact: true}">
         <i class="material-icons">
           storefront
         </i>
         <span>Products</span>
       </a>
-      <a mat-list-item routerLink="/categories" *ngIf="getToken()">
+      <!-- exibir active apenas se item for igual a categories -->
+      <a mat-list-item routerLink="/categories" *ngIf="getToken()" (click)="selectItem('categories')" routerLinkActive="nav_link_selected" [routerLinkActiveOptions]="{exact: true}">
         <i class="material-icons">
           category
         </i>
         <span>Categories</span>
       </a>
-      <a mat-list-item (click)="openLogout()" *ngIf="getToken()" class="mt-auto block">
+      <a mat-list-item (click)="openLogout()" *ngIf="getToken()" class="mt-auto block" routerLinkActive="nav_link_selected" [routerLinkActiveOptions]="{exact: true}">
         <i class="material-icons">
           logout
         </i>
         <span>Logout</span>
       </a>
-      <a mat-list-item routerLink="/login" *ngIf="!getToken()">
+      <a mat-list-item routerLink="/login" *ngIf="!getToken()" (click)="selectItem('login')" (aria-active)="item == 'login'">
         <i class="material-icons">
           login
         </i>
@@ -37,3 +38,4 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
