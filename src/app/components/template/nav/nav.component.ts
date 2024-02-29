@@ -22,8 +22,8 @@ export class NavComponent {
     this.item = item;
   }
 
-  openLogout(): void {
-    if (this.dialog.openDialogs.length > 0) return;
+  openLogout(): void | null {
+    if (this.dialog.openDialogs.length > 0) return null;
     
     this.dialog.open(DialogAnimationsDialog, { data: {
       title: 'Logout',
