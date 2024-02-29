@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductCreateComponent } from './product-create.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input'; // Import MatInputModule
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { AuthService } from '../../auth/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

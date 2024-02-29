@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessages } from '../../models/errorMessage';
 import { HeaderService } from '../../template/header/header.service';
 import { Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+import { HttpClientModule } from '@angular/common/http';
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -18,7 +18,7 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
       providers: [AuthService, FormBuilder, HeaderService, Router],
-      imports: [HttpClientModule], // Provide HttpClientModule
+      imports: [HttpClientModule],
     }).compileComponents();
   });
 

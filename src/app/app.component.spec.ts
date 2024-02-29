@@ -8,7 +8,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpClientModule // Add this line
+        HttpClientModule
       ],
       declarations: [
         AppComponent
@@ -29,7 +29,6 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('frontend');
   });
 
-  // test expecting body title to be set
   it('should set body title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;

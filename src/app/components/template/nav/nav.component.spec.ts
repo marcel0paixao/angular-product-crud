@@ -4,7 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
-import { RouterModule, ActivatedRoute, ActivatedRouteSnapshot, UrlSegment, Params, Data, Route } from '@angular/router'; // Import RouterModule and ActivatedRoute
+import { RouterModule, ActivatedRoute } from '@angular/router';
 
 import { NavComponent } from './nav.component';
 
@@ -22,7 +22,7 @@ describe('NavComponent', () => {
           useValue: {
             snapshot: {
               paramMap: {
-                get: (key: string) => 'mockedParamValue' // Provide a mocked value for any required parameter
+                get: (key: string) => 'mockedParamValue' 
               }
             }
           }

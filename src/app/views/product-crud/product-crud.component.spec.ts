@@ -15,7 +15,7 @@ describe('ProductCrudComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductCrudComponent, ProductReadComponent ] // Add ProductReadComponent to the declarations
+      declarations: [ ProductCrudComponent, ProductReadComponent ]
     })
     .compileComponents();
 
