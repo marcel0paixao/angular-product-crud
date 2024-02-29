@@ -17,6 +17,10 @@ export class AppComponent {
 
   constructor(private authService: AuthService) { }
 
+  ngOnInit(): void {
+    document.body.title = this.title;
+  }
+
   getToken(): string | null {
     return this.authService.getToken();
   }

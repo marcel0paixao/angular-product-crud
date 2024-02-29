@@ -61,6 +61,7 @@ mat-side-nav {
   height: 100vh;
   padding-bottom: 40px;
   background-color: rgb(19, 19, 19);
+  overflow-x: hidden;
 }
 .sidenav a:last-of-type{
   vertical-align: bottom;

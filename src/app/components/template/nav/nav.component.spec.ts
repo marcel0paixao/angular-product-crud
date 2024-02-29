@@ -1,4 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatListModule } from '@angular/material/list';
+import { RouterModule, ActivatedRoute, ActivatedRouteSnapshot, UrlSegment, Params, Data, Route } from '@angular/router'; // Import RouterModule and ActivatedRoute
 
 import { NavComponent } from './nav.component';
 
@@ -8,7 +14,20 @@ describe('NavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavComponent ]
+      declarations: [ NavComponent ],
+      imports: [ HttpClientModule, MatDialogModule, MatSidenavModule, BrowserAnimationsModule, MatListModule, RouterModule ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: (key: string) => 'mockedParamValue' // Provide a mocked value for any required parameter
+              }
+            }
+          }
+        }
+      ]
     })
     .compileComponents();
 

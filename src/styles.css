@@ -62,7 +62,7 @@ button {
 button .primary span {
   color: #f1f1f1 !important;
 }
-h1 ..mat-mdc-dialog-container .mdc-dialog__title {
+h1 .mat-mdc-dialog-container .mdc-dialog__title {
   color: #f1f1f1 !important;
 }
 div[mat-dialog-content]{
@@ -148,4 +148,10 @@ input:-webkit-autofill:focus {
 }
 mat-label, .mat-mdc-form-field-required-marker {
   color: #c1c1c1;
+}
+table {
+  width: max-content;
+}
+.overflow-x {
+  overflow-x: auto;
 }

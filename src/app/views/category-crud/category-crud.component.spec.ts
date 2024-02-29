@@ -1,4 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-category-read',
+  template: ''
+})
+class MockCategoryReadComponent {}
 
 import { CategoryCrudComponent } from './category-crud.component';
 
@@ -8,7 +15,7 @@ describe('CategoryCrudComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CategoryCrudComponent ]
+      declarations: [ CategoryCrudComponent, MockCategoryReadComponent ]
     })
     .compileComponents();
 

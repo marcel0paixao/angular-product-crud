@@ -3,6 +3,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClientModule } from '@angular/common/http'; // Add this import
 
 import { ProductReadComponent } from './product-read.component';
 
@@ -18,6 +20,8 @@ describe('ProductReadComponent', () => {
         MatPaginatorModule,
         MatSortModule,
         MatTableModule,
+        MatSnackBarModule,
+        HttpClientModule, // Add this module
       ]
     }).compileComponents();
   }));
