@@ -12,7 +12,7 @@ export class CategoryCrudComponent {
   constructor(private headerService: HeaderService, private readonly router: Router) {
     headerService.headerData = {
       title: 'Category CRUD',
-      icon: 'storefront',
+      icon: 'category',
       routeUrl: '/categories'
     }
   }

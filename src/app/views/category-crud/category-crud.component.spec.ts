@@ -27,4 +27,24 @@ describe('CategoryCrudComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should navigate to category create', () => {
+    const navigateSpy = spyOn((component as any).router, 'navigate');
+    component.navigateToCategoryCreate();
+    expect(navigateSpy).toHaveBeenCalledWith(['/categories/create']);
+  });
+
+  it('should set headerData', () => {
+    const headerService = (component as any).headerService;
+    expect(headerService.headerData).toEqual({
+      title: 'Category CRUD',
+      icon: 'category',
+      routeUrl: '/categories'
+    });
+  });
+
+  it('should render category-read component', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('app-category-read')).toBeTruthy();
+  });
 });
