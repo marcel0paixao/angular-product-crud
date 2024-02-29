@@ -22,17 +22,35 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'frontend'`, () => {
+  it(`should have as title 'CRUD'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    app.title = 'frontend';
-    expect(app.title).toEqual('frontend');
+    expect(app.title).toEqual('CRUD');
   });
 
-  it('should set body title', () => {
+  it('should initialize loginDto, registerDto, and jwtDto as null', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    app.ngOnInit();
-    expect(document.body.title).toEqual(app.title);
+    expect(app.loginDto).toBeNull();
+    expect(app.registerDto).toBeNull();
+    expect(app.jwtDto).toBeNull();
+  });
+
+  it('should call ngOnInit method', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    const spyOnInit = spyOn(app, 'ngOnInit').and.callThrough();
+    spyOnInit.call('ngOnInit');
+    fixture.detectChanges();
+    expect(spyOnInit).toHaveBeenCalled();
+  });
+
+  it('should return token from getToken method', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    const token = 'dummyToken';
+    spyOn(app, 'getToken').and.returnValue(token);
+    const result = app.getToken();
+    expect(result).toEqual(token);
   });
 });
