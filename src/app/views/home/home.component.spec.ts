@@ -140,4 +140,17 @@ describe('HomeComponent', () => {
     component.categories();
     expect(router.navigate).toHaveBeenCalledWith(['/categories']);
   });
+
+  it('should call onResize method on window resize', () => {
+    const event = { target: { innerWidth: 800 } };
+    const spyOnResize = spyOn(component, 'onResize').and.callThrough();
+    spyOnResize.call(component, event);
+    fixture.detectChanges();
+    expect(spyOnResize).toHaveBeenCalled();
+  });
+
+  it('should display cards', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('mat-card')).toBeTruthy();
+  });
 });
