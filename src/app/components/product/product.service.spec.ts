@@ -61,7 +61,6 @@ describe('ProductService', () => {
     req.flush(mockProducts[1]);
   });
 
-  // should update a product
   it('should update a product', () => {
     service.update(mockProducts[1]).subscribe((product) => {
       expect(product).toEqual(mockProducts[1]);
