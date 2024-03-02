@@ -6,6 +6,7 @@ import { ErrorMessages } from '../../models/errorMessage';
 import { AuthService } from '../../auth/auth.service';
 import { Category } from '../../category/category.model';
 import { CategoryService } from '../../category/category.service';
+import { Product } from '../product.model';
 
 @Component({
   selector: 'app-product-create',
@@ -43,6 +44,7 @@ export class ProductCreateComponent {
       name: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]],
       price: [null, [Validators.required, Validators.min(1), Validators.maxLength(5)]],
       created_at: [new Date(), [Validators.required]],
+      updated_at: [new Date(), [Validators.required]],
       user_id: this.authService.getUser()!.id,
       category_id: [null, [Validators.required]]
     });
@@ -70,12 +72,13 @@ export class ProductCreateComponent {
     return !!this.form.get('name')!.errors || !!this.form.get('price')!.errors || !!this.form.get('category_id')!.errors;
   }
 
-  createProduct(): void {
-    console.log(this.form.value);
+  createProduct(): Product | null {
+    let product = null;
     
     if (this.form.valid) { 
       this.productService.create(this.form.value).subscribe(
-        () => {
+        (response) => {
+          product = response;
           this.router.navigate(['/products'])
           this.productService.showMessage('Sucessfully operation!')
         },
@@ -84,11 +87,11 @@ export class ProductCreateComponent {
             this.form.get('name')!.setErrors({unique: true});
             return;
           }
-          console.log(error)
+          console.log(error);
         }
       )
-      return;
     }
+    return product;
   }
 
   cancel(): void {

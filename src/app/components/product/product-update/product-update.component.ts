@@ -53,7 +53,6 @@ export class ProductUpdateComponent {
 
   ngOnInit(): void {
     this.initForm();
-    console.log(this.form.get('category_id')!.value);
   }
 
   getErrorKeys(controlName: string): string[] {
