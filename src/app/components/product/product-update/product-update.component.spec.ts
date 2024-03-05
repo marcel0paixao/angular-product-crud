@@ -42,15 +42,18 @@ describe('ProductUpdateComponent', () => {
   };
 
   beforeEach(async () => {
+    // product mock
     const productServiceMock = jasmine.createSpyObj('ProductService', ['readById', 'update', 'showMessage']);
     productServiceMock.readById.and.returnValue(of(product));
     productServiceMock.update.and.returnValue(of(updatedProduct));
     productService = productServiceMock;
 
+    // auth mock
     const authServiceMock = jasmine.createSpyObj('AuthService', ['getUser']);
     authServiceMock.getUser.and.returnValue({ id: 1 });
     authService = authServiceMock;
 
+    // router mock
     const routerMock = jasmine.createSpyObj('Router', ['navigate']);
     router = routerMock;
 
