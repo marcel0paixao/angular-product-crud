@@ -95,6 +95,9 @@ describe('ProductUpdateComponent', () => {
   it('should check if any fields are empty', () => {
     component.form.patchValue({ ...product, name: null });
     expect(component.isAnyFieldsEmpty()).toBe(true);
+
+    component.form.patchValue(product);
+    expect(component.isAnyFieldsEmpty()).toBe(false);
   });
 
   it('should update the product', () => {

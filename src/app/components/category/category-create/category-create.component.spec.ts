@@ -83,6 +83,9 @@ describe('CategoryCreateComponent', () => {
   it('should initialize the form', () => {
     expect(component.form).toBeDefined();
     expect(component.form.get('name')).toBeDefined();
+    expect(component.form.get('user_id')).toBeDefined();
+    expect(component.form.get('created_at')).toBeDefined();
+    expect(component.form.get('updated_at')).toBeDefined();
   });
 
   it('should return the error keys for a control', () => {
@@ -100,9 +103,11 @@ describe('CategoryCreateComponent', () => {
   });
 
   it('should check if any fields are empty', () => {
-    // Set form values to empty values
     component.form.setValue({ ...category, name: null });
     expect(component.isAnyFieldsEmpty()).toBe(true);
+
+    component.form.setValue(category);
+    expect(component.isAnyFieldsEmpty()).toBe(false);
   });
 
   it('should create a category', () => {
@@ -122,5 +127,10 @@ describe('CategoryCreateComponent', () => {
   it('should cancel and navigate back', () => {
     component.cancel();
     expect(router.navigate).toHaveBeenCalledWith(['/categories']);
+  });
+
+  it('should show message', () => {
+    categoryService.showMessage('Sucessfully operation!');
+    expect(categoryService.showMessage).toHaveBeenCalledWith('Sucessfully operation!');
   });
 });
