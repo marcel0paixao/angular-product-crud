@@ -14,7 +14,6 @@ import { Product } from '../../components/product/product.model';
 import { User } from '../../components/models/User';
 import { Router } from '@angular/router';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { NavComponent } from 'src/app/components/template/nav/nav.component';
 import { Component } from '@angular/core';
 
 @Component({selector: 'app-nav', templateUrl: '../../components/template/nav/nav.component.html'})
@@ -76,6 +75,9 @@ describe('HomeComponent', () => {
     spyOn(categoryService, 'read').and.returnValue(of([categoryMock]));
     spyOn(productService, 'read').and.returnValue(of([productMock]));
 
+    authService.storeToken('token');
+    authService.storeUser(UserMock);
+
     fixture.detectChanges();
   });
 
@@ -94,8 +96,6 @@ describe('HomeComponent', () => {
   });
 
   it('should initialize token and user', () => {
-    authService.storeToken('token');
-    authService.storeUser(UserMock);
     expect(component.token).toBe('token');
     expect(component.user).toEqual(UserMock);
   });
@@ -106,8 +106,6 @@ describe('HomeComponent', () => {
   });
 
   it('should call categoryService.read() and productService.read() if user is defined', () => {
-    component.token = 'token';
-    component.ngOnInit();
     expect(categoryService.read).toHaveBeenCalled();
     expect(productService.read).toHaveBeenCalled();
   });

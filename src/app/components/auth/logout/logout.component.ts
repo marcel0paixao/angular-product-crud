@@ -17,7 +17,7 @@ export class LogoutComponent {
     }
   }
 
-  NgOnInit(): void {
+  ngOnInit(): void {
     this.authService.clearToken();
     this.router.navigate(['/login']);
   }
