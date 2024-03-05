@@ -6,6 +6,7 @@ import { ErrorMessages } from '../../models/errorMessage';
 import { CategoryService } from '../../category/category.service';
 import { Category } from '../../category/category.model';
 import { AuthService } from '../../auth/auth.service';
+import { Product } from '../product.model';
 
 @Component({
   selector: 'app-product-update',
@@ -67,9 +68,11 @@ export class ProductUpdateComponent {
     return !!this.form.get('name')!.errors || !!this.form.get('price')!.errors || !!this.form.get('category_id')!.errors;
   }
 
-  updateProduct(): void {
+  updateProduct(): Product | null {
+    let product = null;
     this.productService.update(this.form.value).subscribe(
-      () => {
+      (response) => {
+        product = response;
         this.productService.showMessage("Product updated!")
         this.router.navigate(["/products"])
       }, (error) => {
@@ -79,6 +82,7 @@ export class ProductUpdateComponent {
         }
         console.log(error)
       })
+      return product;
   }
 
   cancel(): void {

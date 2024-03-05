@@ -28,13 +28,6 @@ describe('ProductCreateComponent', () => {
     updated_at: new Date()
   };
 
-  const category = {
-    id: 1,
-    name: 'Category 1',
-    created_at: new Date(),
-    updated_at: new Date()
-  };
-
   beforeEach(async () => {
     // product mock
     const productServiceMock = jasmine.createSpyObj('ProductService', ['create', 'showMessage']);
