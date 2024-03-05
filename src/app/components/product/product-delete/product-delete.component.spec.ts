@@ -88,15 +88,7 @@ describe('ProductDeleteComponent', () => {
 
   it('should load product on initialization', () => {
     expect(productService.readById).toHaveBeenCalledWith('1');
-    expect(component.product).toEqual({
-      id: 1,
-      name: 'Product 1',
-      price: 100,
-      user_id: 1,
-      category_id: 1,
-      created_at: jasmine.any(Date),
-      updated_at: jasmine.any(Date)
-    });
+    expect(component.product).toEqual(product);
   });
 
   it('should delete product', () => {
