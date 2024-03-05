@@ -96,7 +96,8 @@ describe('LoginComponent', () => {
   it('should return the error keys for a control', () => {
     const controlName = 'email';
     const errorKeys = component.getErrorKeys(controlName);
-    component.form.setValue({ email: '', password: 'test' });
+    component.form.setValue({ email: 'test', password: 'test' });
+    
     expect(errorKeys).toEqual(['required']);
   });
 
