@@ -11,8 +11,8 @@ describe('CategoryService', () => {
   let service: CategoryService;
   let httpMock: HttpTestingController;
   const mockCategories: Category[] = [
-    { id: 1, name: 'Category 1', created_at: new Date(), updated_at: new Date() },
-    { id: 2, name: 'Category 2', created_at: new Date(), updated_at: new Date() },
+    { id: 1, name: 'Category 1', user_id: 1, created_at: new Date(), updated_at: new Date() },
+    { id: 2, name: 'Category 2', user_id: 1, created_at: new Date(), updated_at: new Date() },
   ];
 
   beforeEach(() => {

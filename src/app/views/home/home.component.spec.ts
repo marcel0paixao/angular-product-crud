@@ -48,6 +48,7 @@ describe('HomeComponent', () => {
   const categoryMock = {
     id: 1,
     name: 'Category 1',
+    user_id: 1,
     created_at: new Date(),
     updated_at: new Date()
   };

@@ -12,6 +12,7 @@ export class CategoryDeleteComponent {
   category: Category = {
     id: 0,
     name: '',
+    user_id: 1,
     created_at: new Date(),
     updated_at: new Date()
   };

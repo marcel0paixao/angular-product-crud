@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessages } from '../../models/errorMessage';
 import { AuthService } from '../../auth/auth.service';
+import { Category } from '../category.model';
 
 @Component({
   selector: 'app-category-create',
@@ -27,7 +28,8 @@ export class CategoryCreateComponent {
     this.form = this.fb.group({
       name: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
       user_id: this.authService.getUser()!.id,
-      created_at: [new Date(), [Validators.required]]
+      created_at: [new Date(), [Validators.required]],
+      updated_at: [new Date(), [Validators.required]]
     });
   }
 
@@ -47,10 +49,12 @@ export class CategoryCreateComponent {
     return !!this.form.get('name')!.errors;
   }
 
-  createCategory(): void {
+  createCategory(): Category | null {
+    let category = null;
     if (this.form.valid) { 
       this.categoryService.create(this.form.value).subscribe(
-        () => {
+        (response) => {
+          category = response;
           this.router.navigate(['/categories'])
           this.categoryService.showMessage('Sucessfully operation!')
         },
@@ -62,8 +66,8 @@ export class CategoryCreateComponent {
           console.log(error)
         }
       )
-      return;
     }
+    return category;
   }
 
   cancel(): void {
