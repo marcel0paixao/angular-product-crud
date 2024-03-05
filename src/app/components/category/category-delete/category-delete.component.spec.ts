@@ -26,15 +26,15 @@ describe('CategoryDeleteComponent', () => {
   };
   
   beforeEach(async () => {
-     // router mock
-     const routerMock = jasmine.createSpyObj('Router', ['navigate']);
-     router = routerMock;
+    // router mock
+    const routerMock = jasmine.createSpyObj('Router', ['navigate']);
+    router = routerMock;
  
-     // category mock
-     const categoryServiceMock = jasmine.createSpyObj('CategoryService', ['delete', 'readById', 'showMessage']);
-      categoryServiceMock.readById.and.returnValue(of(category));
-     categoryServiceMock.delete.and.returnValue(of({category}));
-     categoryService = categoryServiceMock;
+    // category mock
+    const categoryServiceMock = jasmine.createSpyObj('CategoryService', ['delete', 'readById', 'showMessage']);
+    categoryServiceMock.readById.and.returnValue(of(category));
+    categoryServiceMock.delete.and.returnValue(of({category}));
+    categoryService = categoryServiceMock;
 
     await TestBed.configureTestingModule({
       declarations: [ CategoryDeleteComponent ],
