@@ -33,7 +33,7 @@ export class ProductService {
   errorHandler(e: any): Observable<any> {
     // this.showMessage('Occurred an error!', true)
     console.log(e)
-    return EMPTY
+    return EMPTY;
   }
 
   read(): Observable<Product[]> {

@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessages } from '../../models/errorMessage';
 import { CategoryService } from '../category.service';
 import { AuthService } from '../../auth/auth.service';
+import { Category } from '../category.model';
 @Component({
   selector: 'app-category-update',
   templateUrl: './category-update.component.html',
@@ -53,9 +54,11 @@ export class CategoryUpdateComponent {
     return !!this.form.get('name')!.errors;
   }
 
-  updateCategory(): void {
+  updateCategory(): Category | null {
+    let category = null;
     this.categoryService.update(this.form.value).subscribe(
-      () => {
+      (response) => {
+        category = response;
         this.categoryService.showMessage("Category updated!")
         this.router.navigate(["/categories"])
       }, (error) => {
@@ -65,6 +68,7 @@ export class CategoryUpdateComponent {
         }
         console.log(error)
       })
+    return category;
   }
 
   cancel(): void {

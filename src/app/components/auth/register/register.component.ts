@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessages } from '../../models/errorMessage';
 import { Router } from '@angular/router';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-register',
@@ -82,11 +83,12 @@ export class RegisterComponent {
       specialChars: /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(this.form.get('password')!.value),
       lowerCase: /[a-z]/.test(this.form.get('password')!.value),
       upperCase: /[A-Z]/.test(this.form.get('password')!.value),
-      minlength: this.form.get('password')!.hasError('minlength') || this.form.get('password')!.hasError('required'),
+      minlength: this.form.get('password')!.hasError('minlength') || this.form.get('password')!.hasError('required') || this.form.get('password')!.value.length < 7,
     }
   }
 
-  register() {
+  register(): User | null {
+    let user = null;
     if (this.form.valid) {
       this.authService.register(this.form.value).subscribe(
         (response) => {
@@ -94,8 +96,9 @@ export class RegisterComponent {
 
           this.authService.login(this.form.value).subscribe(
             (response) => {
+              user = this.authService.getUser();
               return this.authService.storeToken(response.access_token);
-            },  
+            },
             (error) => {
               console.log(error);
             }
@@ -114,5 +117,6 @@ export class RegisterComponent {
         }
       )
     }
+    return user;
   }
 }

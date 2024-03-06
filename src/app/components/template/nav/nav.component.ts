@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { DialogAnimationsDialog } from '../../dialogs/dialog-animations/dialog-animations.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -11,8 +12,14 @@ import { MatDialog } from '@angular/material/dialog';
 export class NavComponent {
   constructor(private readonly authService: AuthService, public dialog: MatDialog) {}
 
+  item: string = window.location.pathname.split('/')[1] || 'home';
+
   getToken(): boolean {
     return !!this.authService.getToken();
+  }
+
+  selectItem(item: string): void {
+    this.item = item;
   }
 
   openLogout(): void {
@@ -26,5 +33,4 @@ export class NavComponent {
       confirmAction: this.authService.logout
     }})
   }
-
 }

@@ -20,10 +20,6 @@ export class LoginComponent {
     }
   }
 
-  NgOnInit() {
-    if (!!this.authService.getToken()) this.router.navigate(['home'])
-  }
-
   form!: FormGroup;
   errorMessages: ErrorMessages = {
     email: {
@@ -72,7 +68,7 @@ export class LoginComponent {
   }
 
   redirectHome(): void {
-    this.router.navigate(['/products'])
+    this.router.navigate(['/'])
   }
 
   login(): void {

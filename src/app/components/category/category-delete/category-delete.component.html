@@ -1,20 +1,20 @@
 <mat-card>
-    <mat-card-title>Delete Category</mat-card-title>
-    <form action="">
-      <mat-form-field>
-        <input matInput placeholder="Name" [value]="category.name" name="name" disabled>
-      </mat-form-field>
-    </form>
-  
-    <div class="mb-1">
-      <button (click)="deleteCategory()" mat-raised-button color="warn">Delete</button>
-  
-      <button (click)="cancel()" mat-raised-button color="cancel">Cancel</button>
-  
-      <div class="date">
-        Created at:
-        <span>{{ category.created_at | date:'H:mm a - yyyy/MM/dd' }}</span>
-      </div>
+  <mat-card-title>Delete Category</mat-card-title>
+  <form action="">
+    <mat-form-field>
+      <input matInput placeholder="Name" [value]="category.name" name="name" disabled>
+    </mat-form-field>
+  </form>
+
+  <div class="mb-1">
+    <button (click)="deleteCategory()" mat-raised-button color="warn">Delete</button>
+
+    <button (click)="cancel()" mat-raised-button color="cancel">Cancel</button>
+
+    <div class="date">
+      Created at:
+      <span>{{ category.created_at | date:'H:mm a - yyyy/MM/dd' }}</span>
     </div>
-  </mat-card>
+  </div>
+</mat-card>
   

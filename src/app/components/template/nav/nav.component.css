@@ -5,26 +5,49 @@ mat-side-nav {
 }
 .sidenav{
   background-color: rgb(16, 16, 16);
-  width: max-content;
+  width: 53px;
   margin-top: -70px;
+}
+.sidenav:hover {
+  width: 150px;
+  transition: 0.5s;
 }
 .sidenav a:hover{
   background-color: black;
+  transition: 0.5s;
+}
+.sidenav span{
+  margin-left: 20px;
+}
+.sidenav:hover span{
+  margin-left: 0px;
+  transition: 0.5s;
+}
+.sidenav:hover .nav_link_selected{
   width: 140px;
   transition: 0.5s;
 }
 .sidenav a:hover {
   border: 1px solid #ffffff;
 }
-.sidenav a:active {
-  border: 2px solid #ffffff;
+.sidenav .nav_link_selected {
+  border: 1px solid #ffffff;
+  width: 42px;
+}
+.sidenav .nav_link_selected:hover {
+  border-radius: 10px;
 }
 .sidenav a{
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: 5px;
   border-radius: 10px;
   padding: 8px !important;
-  width: 40px;
+  width: 140px;
+}
+.sidenav a:first-of-type{
+  margin-top: 0px;
+}
+.sidenav a:last-of-type{
+  margin-bottom: 0px;
 }
 .sidenav span, .sidenav i{
   color: white;
@@ -38,6 +61,7 @@ mat-side-nav {
   height: 100vh;
   padding-bottom: 40px;
   background-color: rgb(19, 19, 19);
+  overflow-x: hidden;
 }
 .sidenav a:last-of-type{
   vertical-align: bottom;

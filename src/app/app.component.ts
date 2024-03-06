@@ -10,12 +10,16 @@ import { AuthService } from './components/auth/auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  constructor(private authService: AuthService) { }
+
   title = 'CRUD';
   loginDto: Login | null = null;
   registerDto: Register | null = null;
   jwtDto: JwtAuth | null = null;
 
-  constructor(private authService: AuthService) { }
+  ngOnInit(): void {
+    document.body.title = this.title;
+  }
 
   getToken(): string | null {
     return this.authService.getToken();

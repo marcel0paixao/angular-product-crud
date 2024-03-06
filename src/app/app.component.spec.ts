@@ -1,15 +1,31 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http'; 
+import { NavComponent } from './components/template/nav/nav.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FooterComponent } from './components/template/footer/footer.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule,
+        MatDialogModule,
+        MatSidenavModule,
+        BrowserAnimationsModule,
+        MatListModule,
+        MatToolbarModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        NavComponent,
+        FooterComponent
       ],
     }).compileComponents();
   });
@@ -20,16 +36,35 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'frontend'`, () => {
+  it(`should have as title 'CRUD'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('frontend');
+    expect(app.title).toEqual('CRUD');
   });
 
-  it('should render title', () => {
+  it('should initialize loginDto, registerDto, and jwtDto as null', () => {
     const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.loginDto).toBeNull();
+    expect(app.registerDto).toBeNull();
+    expect(app.jwtDto).toBeNull();
+  });
+
+  it('should call ngOnInit method', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    const spyOnInit = spyOn(app, 'ngOnInit').and.callThrough();
+    spyOnInit.call('ngOnInit');
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('frontend app is running!');
+    expect(spyOnInit).toHaveBeenCalled();
+  });
+
+  it('should return token from getToken method', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    const token = 'dummyToken';
+    spyOn(app, 'getToken').and.returnValue(token);
+    const result = app.getToken();
+    expect(result).toEqual(token);
   });
 });

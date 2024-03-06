@@ -12,6 +12,7 @@ export class CategoryDeleteComponent {
   category: Category = {
     id: 0,
     name: '',
+    user_id: 1,
     created_at: new Date(),
     updated_at: new Date()
   };
@@ -25,12 +26,20 @@ export class CategoryDeleteComponent {
     })
   }
 
-  deleteCategory(): void {
+  deleteCategory(): Category | null {
     const id = this.route.snapshot.paramMap.get('id')
-    this.categoryService.delete(id!).subscribe(() => {
-      this.categoryService.showMessage("Category deleted!")
-      this.router.navigate(["/categories"])
-    })
+    let category = null;
+    this.categoryService.delete(id!).subscribe(
+      (response) => {
+        category = response;
+        this.categoryService.showMessage("Category deleted!")
+        this.router.navigate(["/categories"])
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+    return category;
   }
 
   cancel(): void {
